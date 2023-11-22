@@ -4,6 +4,7 @@ dotenv.config();
 import cors from "cors";
 import express from "express";
 import connectDB from "./connectDB.js";
+import Book from "./models/Books.js";
 
 const app = express();
 
@@ -17,6 +18,15 @@ connectDB();
 
 app.get("/", (req, res) => {
   res.send("My-News API");
+})
+
+app.get("/api/books", async (req, res) => {
+  try {
+    const data = await Book.find().sort('title');
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Ocorreu um erro ao buscar os livros." })
+  }
 })
 
 app.get("*", (req, res) => {
