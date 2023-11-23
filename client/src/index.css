@@ -92,6 +92,10 @@ nav {
   align-items: center;
 }
 
+a.active {
+  font-weight: bold;
+}
+
 footer {
   border-top: 1px solid #007d9354;
   text-align: center;
