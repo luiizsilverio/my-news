@@ -29,5 +29,26 @@ router.get("/api/books/:slug", async (req, res) => {
   }
 })
 
+router.post("/api/books", async (req, res) => {
+  try {
+    const { slug, title, stars, description, category } = req.body;
+
+    const newBook = new Book({
+      slug,
+      title,
+      stars,
+      description,
+      category,
+      // thumbnail
+    })
+
+    await Book.create(newBook);
+    res.status(201).send("Livro cadastrado com sucesso");
+    
+  } catch (error) {
+    res.status(500).json({ error: "Ocorreu um erro ao buscar o livro." })
+  }
+})
+
 
 export default router;

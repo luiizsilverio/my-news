@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function SingleBook() {
-  const [livros, setLivros] = useState([]);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const [livro, setLivro] = useState({});
   const params = useParams();
   
   useEffect(() => {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
     const fetchData = async() => {
       let url = `${baseUrl}/api/books/${params.slug}`;
 
@@ -18,7 +18,7 @@ export default function SingleBook() {
         }
 
         const data = await response.json();
-        setLivros(data);
+        setLivro(data);
 
       } catch (error) {
         console.log(error);
@@ -26,13 +26,33 @@ export default function SingleBook() {
     }
 
     fetchData();
-  }, [params]);
+  }, [baseUrl, params]);
 
   
   return ( 
-    <>
-      <div>Single Book</div>
-      <pre>{JSON.stringify(livros, null, 2)}</pre>
-    </>
+    <div>
+      {/* <pre>{JSON.stringify(livros, null, 2)}</pre> */}
+
+      <Link to={"/books"}>⬅Books</Link>
+
+      <div className="bookdetails">
+        <div className="col-1">
+          <img src={`${baseUrl}/uploads/${livro?.thumbnail}`} alt={livro?.title} />
+          <Link to={`/editbook/${livro?.slug}`}>Alterar</Link>
+        </div>
+        
+        <div className="col-2">
+          <h1>{ livro?.title }</h1>
+          <p>{ livro?.description }</p>
+          <p>Avaliação: {"⭐".repeat(livro?.stars)}</p>
+          <p>Categoria</p>
+          <ul>
+            {livro?.category?.map((item, index) => (
+              <li key={index}>{ item }</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   )
 }
