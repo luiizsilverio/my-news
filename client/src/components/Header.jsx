@@ -6,7 +6,7 @@ export default function Header() {
   return ( 
     <header>
       <Link to="/" className="logo">
-        <img src={logo} alt="ReactJs" />ReactJs
+        <img src={logo} alt="My-Books" />My-Books
       </Link>
 
       <nav>

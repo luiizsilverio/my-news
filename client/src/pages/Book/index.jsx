@@ -41,9 +41,11 @@ export default function Book() {
   return ( 
     <div>
       <h2>Livros</h2>
-      <p>Lista de livros no catálogo.</p>
       {/* <pre>{JSON.stringify(livros, null, 2)}</pre> */}
 
+      <Link to="/books/create">+ Adicionar Livro</Link>
+      <div className="hr"></div>
+      
       <div className="filters">
         <label htmlFor="categorias">Categorias</label>
         <select id="categorias" onChange={(e) => setSelCategory(e.target.value)}>

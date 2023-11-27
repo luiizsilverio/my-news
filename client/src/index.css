@@ -86,6 +86,11 @@ header {
   padding-bottom: 1rem;
 }
 
+.hr {
+  border-bottom: 1px solid #007d9354;
+  margin: 8px 0;
+}
+
 nav {
   display: flex;
   gap: 1.2rem;
