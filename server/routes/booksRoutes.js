@@ -1,5 +1,6 @@
 import express from "express";
 import Book from "../models/Books.js";
+import upload from "../config/multer.js";
 
 const router = express.Router();
 
@@ -29,7 +30,7 @@ router.get("/api/books/:slug", async (req, res) => {
   }
 })
 
-router.post("/api/books", async (req, res) => {
+router.post("/api/books", upload.single("thumbnail"), async (req, res) => {
   try {
     const { slug, title, stars, description, category } = req.body;
 
@@ -39,7 +40,7 @@ router.post("/api/books", async (req, res) => {
       stars,
       description,
       category,
-      // thumbnail
+      thumbnail: req.file?.filename || ""
     })
 
     await Book.create(newBook);
@@ -50,5 +51,29 @@ router.post("/api/books", async (req, res) => {
   }
 })
 
+router.put("/api/books", upload.single("thumbnail"), async (req, res) => {
+  try {
+    const { id, slug, title, stars, description, category } = req.body;
+
+    const newBook = {
+      slug,
+      title,
+      stars,
+      description,
+      category,
+    }
+    console.log("id:", id)
+
+    if (req.file) {
+      newBook.thumbnail = req.file.filename;
+    }
+
+    await Book.findByIdAndUpdate(id, newBook);
+    res.status(200).send("Livro alterado com sucesso");
+    
+  } catch (error) {
+    res.status(500).json({ error: "Ocorreu um erro ao buscar o livro." })
+  }
+})
 
 export default router;

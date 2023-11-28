@@ -7,28 +7,34 @@ export default function CreateBook() {
   const [slug, setSlug] = useState("");
   const [stars, setStars] = useState(0);
   const [description, setDescription] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState([]);
   const [thumbnail, setThumbnail] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+  const [image, setImage] = useState(NoImage);
 
-  const createBook = async(e) => {
+  const createBook = async(e) => {    
     const baseUrl = import.meta.env.VITE_BASE_URL;
     e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("slug", slug);
+    formData.append("stars", stars);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("thumbnail", thumbnail);
 
     try {
       const response = await fetch(`${baseUrl}/api/books`, {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title,
-          slug,
-          stars,
-        })
-      });
+        body: formData,
+      })
 
       if (response.ok) {
         setTitle("");
         setSlug("");
+        setThumbnail("");
         setSubmitted(true);
 
       } else {
@@ -37,6 +43,22 @@ export default function CreateBook() {
 
     } catch(error) {
       console.log(error);
+    }
+  }
+
+  const handleCategoryChange = (e) => {
+    setCategory(
+      e.target.value
+        .split(",")
+        .map((category) => category.trim())
+    );
+  }
+
+  const onImageChange = (e) => {
+    console.log(e.target.files[0])
+    if (e.target.files && e.target.files[0]) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+      setThumbnail(e.target.files[0]);
     }
   }
 
@@ -51,8 +73,11 @@ export default function CreateBook() {
       <form className="bookdetails" onSubmit={createBook}>
         <div className="col-1">
           <label htmlFor="thumbnail">Carregar Imagem</label>
-          <img src={NoImage} alt="preview da imagem" id="thumbnail" />
-          <input type="file" accept="image/gif, image/jpeg, image/png" />
+          <img src={image} alt="preview da imagem" id="thumbnail" />
+          <input type="file" 
+            accept="image/gif, image/jpeg, image/png" 
+            onChange={onImageChange}
+          />
         </div>
 
         <div className="col-2">
@@ -89,8 +114,8 @@ export default function CreateBook() {
           <div>
             <label htmlFor="categories">Categorias (separadas por vírgula)</label>
             <input type="string" 
-              value={categories} id="categories" 
-              onChange={(e) => setCategories(e.target.value)}
+              value={category} id="categories" 
+              onChange={handleCategoryChange}
             />
           </div>
 
