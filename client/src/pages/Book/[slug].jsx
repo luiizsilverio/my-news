@@ -39,7 +39,7 @@ export default function SingleBook() {
         <div className="col-1">
           <img src={`${baseUrl}/uploads/${livro?.thumbnail}`} alt={livro?.title} />
           <p>
-            <Link to={`/editbook/${livro?.slug}`}>Alterar</Link>            
+            <Link to={`/books/edit/${livro?.slug}`}>Alterar</Link>            
           </p>
         </div>
         

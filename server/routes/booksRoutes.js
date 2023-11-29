@@ -72,7 +72,19 @@ router.put("/api/books", upload.single("thumbnail"), async (req, res) => {
     res.status(200).send("Livro alterado com sucesso");
     
   } catch (error) {
-    res.status(500).json({ error: "Ocorreu um erro ao buscar o livro." })
+    res.status(500).json({ error: "Ocorreu um erro ao buscar o livro." });
+  }
+})
+
+router.delete("/api/books/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Book.findByIdAndDelete(id);
+    res.status(200).send("Livro excluído com sucesso");
+
+  } catch (error) {
+    res.status(500).json({ error: "Ocorreu um erro ao excluir o livro." });
   }
 })
 

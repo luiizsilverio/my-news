@@ -1,15 +1,17 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import NoImage from "../../assets/no-image-selected.jpg";
 
 export default function CreateBook() {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [stars, setStars] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState([]);
   const [thumbnail, setThumbnail] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted] = useState(false);
   const [image, setImage] = useState(NoImage);
 
   const createBook = async(e) => {    
@@ -32,10 +34,12 @@ export default function CreateBook() {
       })
 
       if (response.ok) {
-        setTitle("");
-        setSlug("");
-        setThumbnail("");
-        setSubmitted(true);
+        navigate("/books");
+
+        // setTitle("");
+        // setSlug("");
+        // setThumbnail("");
+        // setSubmitted(true);
 
       } else {
         console.log("Erro ao enviar os dados do livro.")
@@ -55,7 +59,6 @@ export default function CreateBook() {
   }
 
   const onImageChange = (e) => {
-    console.log(e.target.files[0])
     if (e.target.files && e.target.files[0]) {
       setImage(URL.createObjectURL(e.target.files[0]));
       setThumbnail(e.target.files[0]);

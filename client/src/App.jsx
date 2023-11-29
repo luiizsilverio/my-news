@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Book from './pages/Book';
 import SingleBook from './pages/Book/[slug]';
 import CreateBook from './pages/Book/createBook';
+import EditBook from './pages/Book/editBook';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/books' element={<Book />} />
           <Route path='/books/:slug' element={<SingleBook />} />
           <Route path='/books/create' element={<CreateBook />} />
+          <Route path='/books/edit/:slug' element={<EditBook />} />
         </Routes>
       </Router>
       <Footer />
