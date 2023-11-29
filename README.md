@@ -1,8 +1,8 @@
 # MY-BOOKS 📚
 
-Aplicação back-end desenvolvida em Node.js + Mongoose e front-end em React + Bootstrap, durante o vídeo [MERN Starter Tutorial for Beginners](https://www.youtube.com/watch?v=0osXx2oJu44&list=PL-oyFSB1BovKcapXljUaewPAokD8owR3g&index=1), do canal __Raddy__ no __Youtube__. <br />
+Aplicação back-end desenvolvida em Node.js + Mongoose e front-end em React + Bootstrap, durante o vídeo [MERN Starter Tutorial for Beginners](https://www.youtube.com/watch?v=0osXx2oJu44&list=PL-oyFSB1BovKcapXljUaewPAokD8owR3g&index=1), do canal _Raddy_ no __Youtube__. <br />
 O vídeo é em inglês e o sotaque é difícil de entender 😵, mas com ajuda da legenda, consegui acompanhar as 2 horas de vídeo.<br />
-Aprendi que MERN é a sigla que significa a stack das tecnologias MongoDB + Express + ReactJS + Node.js.<br />
+Aprendi que __MERN__ é a sigla que significa a stack das tecnologias MongoDB + Express + ReactJS + Node.js.<br />
 Trata-se de um CRUD simples de livros, em que o banco de dados fica na nuvem, no __MongoDB Atlas__.<br />
 O nome do repositório está errado devido a uma confusão minha 😣<br />
 <br/>
@@ -11,6 +11,7 @@ O nome do repositório está errado devido a uma confusão minha 😣<br />
 
 - __Node.js__ no back-end
 - __Mongoose__ para banco de dados
+- __Multer__ para upload de imagens
 - __React__ + __Vite__ no front-end
 - __Bootstrap__ para estilização
 
